@@ -33,7 +33,7 @@ class incomeCabangsChart extends BarChartWidget
                 end: now(),
             )
             ->perMonth()
-            ->sum('nominal','Jember');        
+            ->sum('nominal','Jember');    
         $dataSlo = Trend::query(Setoran::where('acc', '1')->where('cabang', 'Solo'))
             ->between(
                 start: now()->startOfMonth(),

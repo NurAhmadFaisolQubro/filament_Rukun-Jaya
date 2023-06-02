@@ -11,12 +11,12 @@ class ListStoks extends ListRecords
 {
     protected static string $resource = StokResource::class;
 
-    protected function getActions(): array
-    {
-        return [
-            Actions\CreateAction::make(),
-        ];
-    }
+    // protected function getActions(): array
+    // {
+    //     return [
+    //         Actions\CreateAction::make(),
+    //     ];
+    // }
  
 protected function getHeaderWidgets(): array
 {

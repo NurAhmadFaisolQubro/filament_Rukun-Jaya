@@ -34,7 +34,13 @@ class UserResource extends Resource
         ->schema([
             Card::make()
         ->schema([
-            TextInput::make('name')->required(),
+            Select::make('name')
+            ->label('posisi')
+    ->options([
+        'Admin Pusat' => 'Admin Pusat',
+        'Admin Cabang' => 'Admin Cabang',
+    ])
+            ->label('Posisi'),
             Select::make('cabang')->required()
             ->options(Cabang::all()->pluck('cabang', 'cabang')),
             TextInput::make('email')
@@ -47,15 +53,12 @@ class UserResource extends Resource
             ->minLength(8)
             ->dehydrated(fn ($state) => filled($state))
             ->dehydrateStateUsing(fn ($state) => Hash::make($state)),
-            // TextInput::make('passwordConfirmation')
-            // ->password()
-            // ->label('Password Confirmation')
-            // ->minLength(8)
-            // ->dehydrated(true),
-            Select::make('id')
-            ->multiple()
-    ->relationship('roles', 'name')
-    ->preload()
+            Select::make('roles')->required()
+            ->options(Role::query()->pluck('name')),
+    //         Select::make('roles')
+    //         ->multiple()
+    //         ->relationship('roles','name')
+    // ->preload()
                 ])
             ]);
         }
@@ -64,12 +67,13 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
+                // TextColumn::make('name'),
                 TextColumn::make('cabang'),
                 // TextColumn::make('role'),
                 TextColumn::make('email'),
                 // TextColumn::make('roles.name'),
-                BadgeColumn::make('roles.name')
+                BadgeColumn::make('name')
+                ->label('Roles')
     ->colors([
         'primary',
         'success' => 'Admin Pusat',

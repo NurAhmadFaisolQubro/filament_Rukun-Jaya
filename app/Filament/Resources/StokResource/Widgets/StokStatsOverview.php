@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\StokResource\Widgets;
 
+use DB;
 use App\Models\Stok;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Card;
@@ -16,13 +17,14 @@ class StokStatsOverview extends BaseWidget
         $stokMlg = Stok::where('cabang', 'Malang')->sum('total_stok');
         $stokJbr = Stok::where('cabang', 'Jember')->sum('total_stok');
         $stokSlo = Stok::where('cabang', 'Solo')->sum('total_stok');
+        
         return [
-            Card::make('Total Stok Krupuk', $stokPrb . ' Bal'),
-            Card::make('Total Stok Krupuk', $stokPsn . ' Bal'),
-            Card::make('Total Stok Krupuk', $stokstb . ' Bal'),
-            Card::make('Total Stok Krupuk', $stokSlo . ' Bal'),
-            Card::make('Total Stok Krupuk', $stokJbr. ' Bal'),
-            Card::make('Total Stok Krupuk', $stokstb . ' Bal'),
+            Card::make('Stok Probolingggo', $stokPrb . ' Bal'),
+            Card::make('Stok Pasuruan', $stokPsn . ' Bal'),
+            Card::make('Stok Situbondo', $stokstb . ' Bal'),
+            Card::make('Stok Malang', $stokMlg . ' Bal'),
+            Card::make('Stok Jember', $stokJbr. ' Bal'),
+            Card::make('Stok Solo', $stokSlo . ' Bal'),
         ];
     }
 }

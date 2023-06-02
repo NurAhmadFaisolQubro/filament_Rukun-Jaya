@@ -33,9 +33,8 @@ class ProduksiResource extends Resource
         ->schema([
             Card::make()
         ->schema([
-            // TextInput::make('stok_id')->required(),
-                Select::make('cabang')->required()
-            ->options(Cabang::all()->pluck('cabang', 'cabang')),
+            //     Select::make('cabang')->required()
+            // ->options(Cabang::all()->pluck('cabang', 'cabang')),
             TextInput::make('produksi')->required()
             ])
         ]);

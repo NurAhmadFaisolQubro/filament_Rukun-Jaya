@@ -23,7 +23,7 @@ class RekapSetoran extends BaseWidget
     protected function getTableColumns(): array
     {
         return [
-                TextColumn::make('nama'),
+                // TextColumn::make('nama'),
                 TextColumn::make('cabang'),
                 TextColumn::make('nominal')->money($symbol = 'idr', $decimalSeparator = '.', $thousandsSeparator = ',', $decimals = 2),
                 BadgeColumn::make('acc')

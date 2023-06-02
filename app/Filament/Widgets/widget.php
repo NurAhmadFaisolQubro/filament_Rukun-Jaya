@@ -25,7 +25,7 @@ class widget extends BaseWidget
             Card::make('Total Pemasukan', 'Rp. ' . number_format($data, 0, ',', '.'))
                 ->chart([7, 2, 10, 3, 15, 4, 17])
                 ->color('warning'),
-            Card::make('Total Cabang', $dataCbg . ' Cabang')
+            Card::make('Total Pabrik', $dataCbg . ' Pabrik')
                 ->chart([7, 2, 10, 3, 15, 4, 17])
                 ->color('danger'),
         ];

@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\StokResource\Pages;
 use App\Filament\Resources\StokResource\Widgets\StokStatsOverview;
-// use App\Filament\Widgets\StokStatsOverview;
+use DB;
 use App\Filament\Resources\StokResource\RelationManagers;
 use App\Models\Stok;
 use App\Models\Cabang;
@@ -30,18 +30,20 @@ class StokResource extends Resource
     protected static ?string $navigationLabel = 'Stok';
     protected static ?string $navigationIcon = 'heroicon-o-scale';
 
-    public static function form(Form $form): Form
-    {
-        return $form
-        ->schema([
-            Card::make()
-        ->schema([
-                Select::make('cabang')->required()
-                ->options(Cabang::all()->pluck('cabang', 'cabang')),
-                TextInput::make('total_stok')->required(),
-             ])
-        ]);
-    }
+    // public static function form(Form $form): Form
+    // {
+        // return $form
+        // ->schema([
+        //     Card::make()
+        // ->schema([
+        //         Select::make('cabang')->required()
+        //         ->options(Cabang::all()->pluck('cabang', 'cabang')),
+        //         TextInput::make('total_stok'),
+        //         TextInput::make('total_produksi'),
+        //         TextInput::make('total_tagihan'),
+        //      ])
+        // ]);
+    // }
 
     public static function table(Table $table): Table
     {
@@ -49,13 +51,16 @@ class StokResource extends Resource
             ->columns([
                 TextColumn::make('cabang'),
                 TextColumn::make('total_stok')->formatStateUsing(fn (string $state): string => __("{$state} Bal")),
+                TextColumn::make('total_produksi')->formatStateUsing(fn (string $state): string => __("{$state} Bal")),
+                TextColumn::make('harga_per_Bal')->money($symbol = 'idr', $decimalSeparator = '.', $thousandsSeparator = ',', $decimals = 0),
+                TextColumn::make('total_tagihan')->money($symbol = 'idr', $decimalSeparator = '.', $thousandsSeparator = ',', $decimals = 0),
                 TextColumn::make('created_at')->dateTime()
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -79,8 +84,8 @@ class StokResource extends Resource
     {
         return [
             'index' => Pages\ListStoks::route('/'),
-            'create' => Pages\CreateStok::route('/create'),
-            'edit' => Pages\EditStok::route('/{record}/edit'),
+            // 'create' => Pages\CreateStok::route('/create'),
+            // 'edit' => Pages\EditStok::route('/{record}/edit'),
         ];
     }    
 }

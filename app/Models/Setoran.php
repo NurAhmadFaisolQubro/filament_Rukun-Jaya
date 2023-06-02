@@ -9,4 +9,8 @@ class Setoran extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function stok(): HasMany
+    {
+        return $this->hasMany(Stok::class, 'cabang');
+    }
 }
